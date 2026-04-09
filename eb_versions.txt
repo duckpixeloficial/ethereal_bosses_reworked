@@ -5,7 +5,7 @@
 - Updating from "Minetest" to "core" (Luanti)
 - Added translations to Brazilian Portuguese and Spanish 
 
-0.50
+0.50.1
 - The mod now works with or without other mods
 - The "Crazy Mushroom" boss now shoots mushroom blocks
 - The mushroom gloves have been changed (now they shoot mushroom blocks), but can be equipped with "3D armor"

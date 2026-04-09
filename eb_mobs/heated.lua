@@ -1,5 +1,6 @@
 -- SOUND :
 -- https://freesound.org/people/NicknameLarry/sounds/489901/ (CC0)
+-- https://freesound.org/people/spookymodem/sounds/249809/ (CC BY 4.0)
 
 local S = core.get_translator("ethereal_bosses")
 
@@ -26,13 +27,40 @@ glow = 4,
 })
 end
 
+local function heated_part_fire (pos)
+core.add_particlespawner({
+amount = 10, 
+time = 1, 		    
+minpos = {x = pos.x + 1.7 , y = pos.y+1, z = pos.z + 1.7},
+maxpos = {x = pos.x - 1.7, y = pos.y + 4, z = pos.z - 1.7},		    
+minvel = {x = 0, y = 1, z = 0}, 
+maxvel = {x = 0, y = 4, z = 0},  
+minacc = {x = -2, y = -1, z = -2},
+maxacc = {x = 2, y = 4, z = 2}, 		    
+minexptime = 1, 
+maxexptime = 1,		     
+minsize = 5,
+maxsize = 10,		    
+collisiondetection = false,
+vertical = true, 
+texture = "mobs_fire_particle.png", 
+glow = 4, 
+})
+end
 
 mobs:register_mob("ethereal_bosses:heated", {
 	--nametag = "Heated Boss",
 	type = "monster",
 	passive = false,
 	attack_npcs = false,
-	attack_type = "dogfight",
+	--attack_type = "dogfight",
+	attack_type = "dogshoot",
+	shoot_interval = 3,
+	shoot_offset = 1.3,
+	dogshoot_switch = 1,
+	dogshoot_count_max = 2, 
+	dogshoot_count2_max = 2, 
+	arrow = "ethereal_bosses:heated_fire",
 	pathfinding = true,
 	reach = 8,
 	damage = 20,
@@ -55,6 +83,7 @@ mobs:register_mob("ethereal_bosses:heated", {
 		random = "monsterhot",
 		--attack = "flaming_sword",
 		--death = "",
+		shoot_attack = "fire_sword_storch",
 	},
 	--fly = false,
 	--fly_in = "air",
@@ -89,6 +118,10 @@ mobs:register_mob("ethereal_bosses:heated", {
 		punch2_start = 110,
 		punch2_end = 150, -- 100 termina a espada
 		punch2_loop = false,
+		shoot_start =210,
+		shoot_end = 248,
+		shoot_normal = 20,
+		shoo_loop = false,
 		die_start = 160,
 		die_end = 200,
 	},
@@ -122,6 +155,49 @@ mobs:register_mob("ethereal_bosses:heated", {
 
 	return true -- PARA CONTINUAR.
 	end,					
+})
+
+-- ARROW -----------------------------------------------------------
+mobs:register_arrow("ethereal_bosses:heated_fire", {
+	visual = "sprite",
+	visual_size = {x = 1.5, y = 1.5},
+	collisionbox = {-0.5,-0.5,-0.5, 0.5,0.5,0.5},
+	velocity = 35,
+	textures = {"mobs_fire_particle.png"},
+	--
+	tail = 1,
+	tail_texture = "mobs_fire_particle.png",
+	tail_size = 11,
+	--
+	glow = 5,
+	expire = 0.15,
+	
+	on_activate = function(self, staticdata, dtime_s)
+	   self.object:set_armor_groups({immortal = 1, fleshy = 100})	
+	        	   
+	   self.damage = 15	   
+	   
+	   if core.get_modpath("mcl_armor") then
+	    self.damage = 3	  
+           end
+          
+	end,
+	
+
+	hit_player = function(self, player)
+		player:punch(self.object, 1.0, {
+			full_punch_interval = 0.5,
+			damage_groups = {fleshy = self.damage},
+		}, nil)
+		
+	end,
+
+	
+	hit_node = function(self, pos, node)
+	  heated_part_fire (pos)
+	end,
+	
+	
 })
 	  
 mobs:register_egg("ethereal_bosses:heated", S("Heated"), "eggsheated.png", 0)

@@ -94,7 +94,7 @@ mobs:register_arrow("ethereal_bosses:mushroom_shot", {
            end
           
 	end,
-	
+	--[[
 	on_punch = function(self, hitter, tflp, tool_capabilities, dir)
 
 		if hitter and hitter:is_player() and tool_capabilities and dir then
@@ -114,6 +114,7 @@ mobs:register_arrow("ethereal_bosses:mushroom_shot", {
 			end
 		end
 	end,
+	]]
 
 	hit_player = function(self, player)
 		player:punch(self.object, 1.0, {

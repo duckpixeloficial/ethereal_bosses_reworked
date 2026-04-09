@@ -2,6 +2,7 @@
 -- https://freesound.org/people/MadamVicious/sounds/218185/ (CC0)
 -- https://freesound.org/people/satchdev/sounds/325411/ (CC0)
 -- https://freesound.org/people/MadamVicious/sounds/347339/  (CC0)
+--https://freesound.org/people/Omiranda14/sounds/790466/ (CC BY 4.0)
 
 local S = core.get_translator("ethereal_bosses")
 
@@ -38,8 +39,8 @@ mobs:register_mob("ethereal_bosses:frostyqueen", {
 	dogshoot_switch = 1,
 	dogshoot_count_max = 2, 
 	dogshoot_count2_max = 2, 
-	shoot_interval = 1.5,
-	shoot_offset = 1.5,
+	shoot_interval = 15,
+	shoot_offset = -1,
 	arrow = "ethereal_bosses:snowflake",
 	pathfinding = true,
 	reach = 5,
@@ -61,12 +62,12 @@ mobs:register_mob("ethereal_bosses:frostyqueen", {
 	sounds = {
 		random = "girlsmile",
 		--damage = "golpeada",
-		attack = "attack_range_queen",
+		attack = "ice_colide",
 		death = "gameover",	
 	},
 	
-	walk_velocity = 0,
-	run_velocity = 0,
+	walk_velocity = 2,
+	run_velocity = 4,
 	jump_height = 1,
 	stepheight = 1.1,
 	floats = 0,
@@ -87,10 +88,16 @@ mobs:register_mob("ethereal_bosses:frostyqueen", {
 		walk_end = 39,
 		run_start = 1,
 		run_end = 39,
-		punch_start = 50,
-		punch_end = 90,
-		shoot_start =101,
-		shoot_end = 120,	
+		punch_start = 130,
+		punch_end = 150,
+		punch_loop = false,
+		shoot_start =50,
+		shoot_end = 90,
+		shoo_loop = false,
+		--shoot_start =101,
+		--shoot_end = 120,
+		die_start = 160,
+		die_end = 200,	
 	},
 	
 	after_activate = function(self, staticdata, def, dtime)	  
@@ -115,34 +122,48 @@ mobs:register_mob("ethereal_bosses:frostyqueen", {
 	custom_attack = function(self, to_attack) -- Custom attacks by: TenPlus1 and Duckgo (In progress)
 
 	 self.attack_count = (self.attack_count or 0) + 1
-	  if self.attack_count < 5 then return end
-	    self.attack_count = 0
+	  if self.attack_count < 3 then return end
+	     self.attack_count = 0
 	
-	 self:set_animation("punch",false)
-	 --core.log("punch ok")
-
-	 local pos = self.object:get_pos()
-	 core.sound_play("attack_range_queen", {pos = pos, gain = 0.5})
+	 self:set_animation("punch", true)
 	 
-	 core.add_entity({x=pos.x +3,y=pos.y+3,z=pos.z}, "ethereal_bosses:icemonster")
-         core.add_entity({x=pos.x -3,y=pos.y+3,z=pos.z}, "ethereal_bosses:icemonster")
-         core.add_entity({x=pos.x,y=pos.y+3,z=pos.z-3}, "ethereal_bosses:icemonster")
-         core.add_entity({x=pos.x,y=pos.y+3,z=pos.z+3}, "ethereal_bosses:icemonster")
-	    
+	 local pos = self.attack:get_pos()
+	 
+
+           core.add_particlespawner({
+	    amount = 10,
+	    time = 0.5,
+	    minpos = {x=pos.x + 2, y=pos.y + -1, z=pos.z + 2},
+	    maxpos = {x=pos.x - 2, y=pos.y + 2, z=pos.z - 2},
+	    minvel = {x=0, y=-0.2, z=0},
+	    maxvel = {x=0, y=-0.2, z=0},
+	    minacc = {x=0, y=0, z=0},
+	    maxacc = {x=0, y=0, z=0},
+	    minexptime = 1.5,
+	    maxexptime = 1.5,
+	    minsize = 5,
+	    maxsize = 3,
+	    collisiondetection = true,
+	    vertical = false,
+	    texture = "fqp.png",   
+	    glow = 14,
+	   }) 
+            
+	    return true
 	end,					
 })
 
 
 -- ARROW -----------------------------------------------------------
 mobs:register_arrow("ethereal_bosses:snowflake", {
-	visual = "cube",
+	visual = "sprite",
 	visual_size = {x = 1.5, y = 1.5},
 	collisionbox = {-0.5,-0.5,-0.5, 0.5,0.5,0.5},
-	velocity = 35,
-	textures = {"default_ice.png","default_ice.png","default_ice.png","default_ice.png","default_ice.png","default_ice.png"},
+	velocity = 25,
+	textures = {"fq_shoot_blank.png"},
 	glow = 2,
 	expire = 0.25,
-
+	
 	on_activate = function(self, staticdata, dtime_s)
 	   self.object:set_armor_groups({immortal = 1, fleshy = 100})	
 	        	   
@@ -154,15 +175,21 @@ mobs:register_arrow("ethereal_bosses:snowflake", {
           
 	end,
 	
+	--[[
 	hit_player = function(self, player)
 		player:punch(self.object, 1.0, {
 			full_punch_interval = 0.5,
 			damage_groups = {fleshy = self.damage},
 		}, nil)
 	end,
+	]]
 	
 	hit_node = function(self, pos, node)
+	 frosty_queem_part (pos)
+	 core.add_entity(pos, "ethereal_bosses:icemonster")
+	 core.sound_play("ice_colide", {pos = pos, gain = 1.5})
 	end,
+	
 	
 })
 
