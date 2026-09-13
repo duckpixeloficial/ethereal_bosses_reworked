@@ -175,7 +175,7 @@ mobs:register_arrow("ethereal_bosses:heated_fire", {
 	on_activate = function(self, staticdata, dtime_s)
 	   self.object:set_armor_groups({immortal = 1, fleshy = 100})	
 	        	   
-	   self.damage = 15	   
+	   self.damage = 20	   
 	   
 	   if core.get_modpath("mcl_armor") then
 	    self.damage = 3	  
