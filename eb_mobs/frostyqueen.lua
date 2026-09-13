@@ -130,7 +130,7 @@ mobs:register_mob("ethereal_bosses:frostyqueen", {
 	 local pos = self.attack:get_pos()
 	 
 
-           core.add_particlespawner({
+        core.add_particlespawner({
 	    amount = 10,
 	    time = 0.5,
 	    minpos = {x=pos.x + 2, y=pos.y + -1, z=pos.z + 2},

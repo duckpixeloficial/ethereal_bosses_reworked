@@ -6,7 +6,7 @@ mobs:register_mob("ethereal_bosses:icemonster", {
 	attack_type = "dogfight",
 	pathfinding = true,
 	reach = 3,
-	damage = 15,
+	damage = 20,
 	hp_min = 100,
 	hp_max = 100,
 	armor = 80,

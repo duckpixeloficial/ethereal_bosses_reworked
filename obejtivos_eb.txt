@@ -1,0 +1,8 @@
+- Supporte a xp no mcl
+- Melhorar AI mobs
+- Retornar coquistas
+- Estruturas (Opção de dasativar estruturas)
+    - Castelo da rainha+ altar
+    - Arena de chamas + altar
+    - Arena de cogumelos + altar
+    - proteção para arenas

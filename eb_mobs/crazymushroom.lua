@@ -19,7 +19,7 @@ mobs:register_mob("ethereal_bosses:crazymushroom", {
 	arrow = "ethereal_bosses:mushroom_shot",
 	pathfinding = true,
 	reach = 8,
-	damage = 18,
+	damage = 20,
 	hp_min = 1100,
 	hp_max = 1100,
 	armor = 80,
@@ -87,35 +87,14 @@ mobs:register_arrow("ethereal_bosses:mushroom_shot", {
 	on_activate = function(self, staticdata, dtime_s)
 	   self.object:set_armor_groups({immortal = 1, fleshy = 100})	
 	        	   
-	   self.damage = 18	   
+	   self.damage = 20	   
 	   
 	   if core.get_modpath("mcl_armor") then
 	    self.damage = 4	  
            end
           
 	end,
-	--[[
-	on_punch = function(self, hitter, tflp, tool_capabilities, dir)
-
-		if hitter and hitter:is_player() and tool_capabilities and dir then
-
-			local damage = tool_capabilities.damage_groups and
-			tool_capabilities.damage_groups.fleshy or 1
-
-			local tmp = tflp / (tool_capabilities.full_punch_interval or 1.4)
-
-			if damage > 6 and tmp < 4 then
-
-				self.object:set_velocity({
-					x = dir.x * self.velocity,
-					y = dir.y * self.velocity,
-					z = dir.z * self.velocity,
-				})
-			end
-		end
-	end,
-	]]
-
+	
 	hit_player = function(self, player)
 		player:punch(self.object, 1.0, {
 			full_punch_interval = 0.5,
