@@ -40,5 +40,11 @@ else
 dofile(path .. "/eb_spawn.lua")
 end
 
-
+if core.global_exists("armor") then
+	  --local lm = armor.config.level_multiplier or 0.1
+      --local hm = armor.config.level_multiplier or 0.1
+	  armor.config.level_multiplier = 0.8
+      armor.config.heal_multiplier = 0.1
+      --core.log("armor")
+end
 
