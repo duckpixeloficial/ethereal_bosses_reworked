@@ -16,7 +16,7 @@ core.register_tool("ethereal_bosses:pick_mushroom", {
 		damage_groups = {fleshy=3},
 	},
 	sound = {breaks = "default_tool_breaks"},
-	groups = {pickaxe = 1,pickaxey = 1,weapon = 1,enchantability = -1},
+	groups = {pickaxe = 1,pickaxey = 1,weapon = 1,enchantability = 10},
 })
 
 core.register_tool("ethereal_bosses:shovel_mushroom", {
@@ -33,7 +33,7 @@ core.register_tool("ethereal_bosses:shovel_mushroom", {
 		damage_groups = {fleshy=2},
 	},
 	sound = {breaks = "default_tool_breaks"},
-	groups = {shovel = 1,weapon = 1,enchantability = -1},
+	groups = {shovel = 1,weapon = 1,enchantability = 10},
 })
 
 core.register_tool("ethereal_bosses:axe_mushroom", {
@@ -49,7 +49,7 @@ core.register_tool("ethereal_bosses:axe_mushroom", {
 		damage_groups = {fleshy=3},
 	},
 	sound = {breaks = "default_tool_breaks"},
-	groups = {axe = 1,weapon = 1,enchantability = -1},
+	groups = {axe = 1,weapon = 1,enchantability = 10},
 })
 
 core.register_tool("ethereal_bosses:sword_mushroom", {
@@ -65,7 +65,7 @@ core.register_tool("ethereal_bosses:sword_mushroom", {
 		damage_groups = {fleshy=5},
 	},
 	sound = {breaks = "default_tool_breaks"},
-	groups = {sword = 1,weapon = 1,enchantability = -1},
+	groups = {sword = 1,weapon = 1,enchantability = 10},
 })
 
 -- Sound whip : https://freesound.org/people/CGEffex/sounds/93100/
@@ -82,9 +82,8 @@ core.register_tool("ethereal_bosses:naturewhip", {
 		},
 		damage_groups = {fleshy=4, knockback=2},
 	},
-	sound = {
-	breaks = "default_tool_breaks",
-	punch_use = "whip",
+	groups = {sword = 1,weapon = 1,enchantability = 10},
+	sound = {breaks = "default_tool_breaks",punch_use = "whip",
 	},	
 })
 
@@ -102,9 +101,8 @@ core.register_tool("ethereal_bosses:naturerod", {
 		},
 		damage_groups = {fleshy=5, knockback=2},
 	},
-	sound = {
-	breaks = "default_tool_breaks"
-	},
+	groups = {sword = 1,weapon = 1,enchantability = 10},
+	sound = {breaks = "default_tool_breaks"},
 })
 
 core.register_tool("ethereal_bosses:sword_obsidian", { -- SERA REMOVIDA, N SERÁ MAIS NADA,NEM PREMIO,NEM NADA
@@ -122,15 +120,11 @@ core.register_tool("ethereal_bosses:sword_obsidian", { -- SERA REMOVIDA, N SERÁ
 				maxlevel = 3
 			},
 		},
-		damage_groups = {fleshy = 9},
+		damage_groups = {fleshy = 9,enchantability = 10},
 	},
 	
-	sound = {
-	punch_use = "swoosh1",
-	punch_use_air ="swoosh1",
-	},
-	
-	groups = {sword = 1,weapon = 1,enchantability = -1},
+	sound = {punch_use = "swoosh1",punch_use_air ="swoosh1"},
+	groups = {sword = 1,weapon = 1,enchantability = 10},
 })
 
 core.register_tool("ethereal_bosses:glove_glove", {
@@ -152,7 +146,7 @@ core.register_tool("ethereal_bosses:glove_glove", {
 		damage_groups = {fleshy = 12,knockback=2},
 	},	
 	sound = {punch_use = "punch_boxing",punch_use_air ="punch_boxing"},	
-        groups = {armor_hand = 2, armor_heal = 2, armor_use = 40,physics_speed = 0.5, physics_jump = 1},
+    groups = {armor_hand = 2, armor_heal = 2, armor_use = 40,physics_speed = 0.5, physics_jump = 1},
 	
 	on_use = function(itemstack, user, pointed_thing)
          local dir = user:get_look_dir()
@@ -232,7 +226,7 @@ core.register_tool("ethereal_bosses:flaming_sword", {
 	punch_use = "swoosh1",
 	punch_use_air ="swoosh1",
 	},
-	groups = {sword = 1,weapon = 1,enchantability = -1},
+	groups = {sword = 1,weapon = 1,fire_immune = 1,enchantability = 10},
 })
 
 -- AURORA TOOLS: ======================================================================================
@@ -252,7 +246,7 @@ core.register_tool("ethereal_bosses:pick_aurora", {
 		damage_groups = {fleshy=7},
 	},
 	sound = {breaks = "default_tool_breaks"},
-	groups = {pickaxe = 1,weapon = 1,enchantability = -1},
+	groups = {pickaxe = 1,weapon = 1,enchantability = 10},
 })
 
 core.register_tool("ethereal_bosses:shovel_aurora", {
@@ -270,7 +264,7 @@ core.register_tool("ethereal_bosses:shovel_aurora", {
 		damage_groups = {fleshy=5},
 	},
 	sound = {breaks = "default_tool_breaks"},
-	groups = {shovel = 1,weapon = 1,enchantability = -1},
+	groups = {shovel = 1,weapon = 1,enchantability = 10},
 })
 
 
@@ -289,7 +283,7 @@ core.register_tool("ethereal_bosses:axe_aurora", {
 		damage_groups = {fleshy=8},
 	},
 	sound = {breaks = "default_tool_breaks"},
-	groups = {axe = 1,weapon = 1,enchantability = -1},
+	groups = {axe = 1,weapon = 1,enchantability = 10},
 })
 
 
@@ -312,7 +306,7 @@ core.register_tool("ethereal_bosses:sword_aurora", {
 		damage_groups = {fleshy = 25},
 	},
 	sound = {breaks = "default_tool_breaks"},
-	groups = {sword = 1,weapon = 1,enchantability = -1},
+	groups = {sword = 1,weapon = 1,enchantability = 10},
 })
 
 

@@ -91,7 +91,7 @@ mobs:register_arrow("ethereal_bosses:mushroom_shot", {
 	   
 	   if core.get_modpath("mcl_armor") then
 	    self.damage = 4	  
-           end
+        end
           
 	end,
 	
@@ -104,7 +104,7 @@ mobs:register_arrow("ethereal_bosses:mushroom_shot", {
 	
 	hit_object = function(self, player)
 		player:punch(self.object,1.0, {
-			full_punch_interval = 1.0,
+			full_punch_interval = 0.5,
 			damage_groups = {fleshy = 18},	
 		}, nil)
 	end,
